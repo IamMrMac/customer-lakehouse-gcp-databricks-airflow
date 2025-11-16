@@ -225,21 +225,6 @@ export AIRFLOW__CORE__EXECUTOR=LocalExecutor
 export AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://...
 ```
 
-See `.env.example` for complete configuration.
-
-## 📈 Cost Estimates
-
-Estimated monthly costs for production (moderate workload):
-
-| Service | Configuration | Monthly Cost |
-|---------|--------------|--------------|
-| Cloud Composer | n1-standard-1, 3 nodes | $300 |
-| GCS | 1TB storage, 100GB egress | $30 |
-| Databricks | 5 DBU/day avg | $200 |
-| Cloud SQL | db-n1-standard-1 | $100 |
-| **Total** | | **~$630/mo** |
-
-See [docs/cost_estimates.md](docs/cost_estimates.md) for optimization strategies.
 
 ## 🧑‍💻 Development
 
