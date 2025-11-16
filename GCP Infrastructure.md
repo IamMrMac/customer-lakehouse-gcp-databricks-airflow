@@ -70,7 +70,7 @@ resource "google_storage_bucket" "landing_zone" {
   labels = local.common_tags
 }
 
-# Bronze layer storage
+## Bronze layer storage
 resource "google_storage_bucket" "bronze_layer" {
   name          = "${var.project_id}-bronze"
   location      = var.region
@@ -89,7 +89,7 @@ resource "google_storage_bucket" "bronze_layer" {
   labels = local.common_tags
 }
 
-# Silver layer storage
+## Silver layer storage
 resource "google_storage_bucket" "silver_layer" {
   name          = "${var.project_id}-silver"
   location      = var.region
@@ -108,7 +108,7 @@ resource "google_storage_bucket" "silver_layer" {
   labels = local.common_tags
 }
 
-# Gold layer storage
+## Gold layer storage
 resource "google_storage_bucket" "gold_layer" {
   name          = "${var.project_id}-gold"
   location      = var.region
@@ -138,9 +138,9 @@ resource "google_storage_bucket" "airflow_dags" {
   labels = local.common_tags
 }
 
-# ============================================================================
-# KMS FOR ENCRYPTION (CMEK)
-# ============================================================================
+### ============================================================================
+## KMS FOR ENCRYPTION (CMEK)
+### ============================================================================
 
 resource "google_kms_key_ring" "lakehouse_keyring" {
   name     = "customer-lakehouse-keyring"
@@ -157,34 +157,34 @@ resource "google_kms_crypto_key" "bucket_key" {
   }
 }
 
-# ============================================================================
-# SERVICE ACCOUNTS (Least Privilege)
-# ============================================================================
+### ============================================================================
+## SERVICE ACCOUNTS (Least Privilege)
+### ============================================================================
 
-# Airflow service account
+## Airflow service account
 resource "google_service_account" "airflow_sa" {
   account_id   = "airflow-orchestrator"
   display_name = "Airflow Orchestration Service Account"
   description  = "Service account for Airflow to orchestrate data pipelines"
 }
 
-# Databricks service account
+## Databricks service account
 resource "google_service_account" "databricks_sa" {
   account_id   = "databricks-compute"
   display_name = "Databricks Compute Service Account"
   description  = "Service account for Databricks clusters"
 }
 
-# Airbyte service account
+## Airbyte service account
 resource "google_service_account" "airbyte_sa" {
   account_id   = "airbyte-ingestion"
   display_name = "Airbyte Ingestion Service Account"
   description  = "Service account for Airbyte data ingestion"
 }
 
-# ============================================================================
-# IAM BINDINGS (Least Privilege Access)
-# ============================================================================
+### ============================================================================
+## IAM BINDINGS (Least Privilege Access)
+### ============================================================================
 
 # Airflow can read/write to all buckets
 resource "google_storage_bucket_iam_member" "airflow_landing" {
